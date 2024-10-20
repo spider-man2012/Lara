@@ -1,0 +1,166 @@
+1- FTK imager-access data
+2- Pro discover basic - getintope.com
+3- Autopsy
+4-Wireshark
+5- Wireshark
+6- process monitor, Belkasoft live RAM capture, Tcp View, Disk Mon, VMMAP. RAMmap
+7- Autopsy
+9 - Access data - FTK imager 8- Mobiledit forensic tool
+18- Browser history examiner.
+
+Practical-1
+(i) Create forensic image-file
+- create disk image contents of a folder
+- select source path click add
+- case levidence no. / description-fill select destination folder.
+- click image summary
+
+(ii) Analyze forensic image
+- file 
+- add evidence
+- select image file
+- enter source path 
+- select evidence trie
+
+Practical-2
+(i) data aquisition
+open software
+-enter project no. and name
+- click on add
+- capture and add image
+fill the details
+open the image
+- add image
+select file and type a comment
+- right click to see gallery vieu
+click on search
+- enter the file name
+click add to report
+
+
+Practical 3
+(i) forensic case study.
+- open software
+-new case
+-enter case name
+-select base directory.
+-enter the optional details
+- select type of data source to add
+- select Vm file
+-select image file
+- select all check boxes
+-Next and Finish
+- images will be displayed, select any to see the data
+- expand the free
+- select ang file and right click to extract file
+enter path to entract files
+go to import folder to recover file.
+click on tools on autopsy
+click generate report
+- select execel report
+- click on reports -under tags
+
+Practical4
+(i) Capture and analyse parkets
+select local as avea connection
+stop network trafficking
+see color coding
+Filter the pachets based on ip address to analyze
+- click on any protocol
+apply as filter
+select selected
+
+Practical 5
+
+(i) Analyze the packets
+select any http request
+- right click and select apply as column search the host column for
+www.snopes.com. Select follow tep stream
+apply files by cell and zillow
+select the packet
+right click and click on protocol
+preferences.
+sellect allow sub dissector to reassemble
+tep streams
+click file
+export objects
+select http
+save all
+- filter http.response
+- select any packet and select apply. as column after right click. to count the of apache packet contains" apache" no
+filter http. server - select statistics in tabs
+sellick and point to display filter on
+
+Practical 6
+6) Process monitor
+-name the categories of utilities in windows sysinternals
+-apply filter by process name, process tree, process activity summary and count pre occurences.
+(ii) Belkasoft live RAM capture - select output folder path
+- click capture
+ii) Top view
+to capture TCP/UDP packets
+save to itxt fil
+select any protocol - right click and select who is
+(iv) Disk Mon
+- to monitor hard disk
+save to loy file
+- Check operations as per time.
+(v) VMMAP
+to monitor virtual memory
+click file
+select process eg. che chrome.ene
+- save to mmp fik.
+(i) Rammap
+- save to rmp file
+
+Practical 7
+Chick, recover and analyze deleted files
+- click new case
+fill case info
+Fill additional info
+- select local disk
+- finish and weit nevet
+On autopsy window analysing will start
+select any file to see the data
+-expand the tree
+any file
+- right click to entract files
+save the recovered file
+click on mport
+on home click tools
+click generate report
+select excel file
+- open excel 
+
+
+Practical 9
+Email forensics
+- start access data
+start now case
+- next till Refine case-default
+- click email emphasis
+ click nent until - add evidence to case
+click individual file
+- select file
+- in case summary - click nevet
+click email messager - click full path to sort
+- in email tub click deleted items.
+select any message and launch
+click inbox In email tab
+right click on any message and neport
+click rename.
+type message name as .html
+press enter.
+
+Practical 10
+-open browser History examiner
+file
+- capture history.
+- select capture from this computer!
+-enter destination to capture the dato
+click bookmarks
+- just view all tabs-cached files, cached
+images, cookies
+Fi
+report-save as pdf
+- Exeport to html
