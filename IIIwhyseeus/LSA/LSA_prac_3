@@ -1,0 +1,117 @@
+[root@Lddvscm11 Desktop]# yum install ntp
+Loaded plugins: refresh-packagekit, rhnplugin
+This system is not registered with RHN.
+RHN support will be disabled.
+Setting up Install Process
+Nothing to do
+[root@Lddvscm11 Desktop]# vi /etc/ntp.conf
+
+
+# Permit time synchronization with our time source, but do not
+# permit the source to query or modify the service on this system.
+restrict default kod nomodify notrap nopeer noquery
+restrict -6 default kod nomodify notrap nopeer noquery
+
+# Permit all access over the loopback interface.  This could
+# be tightened as well, but to do so would effect some of
+# the administrative functions.
+restrict 127.0.0.1
+restrict -6 ::1
+
+# Hosts on local network are less restricted.
+#restrict 192.168.1.0 mask 255.255.255.0 nomodify notrap
+
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
+server 0.rhel.pool.ntp.org
+server 1.rhel.pool.ntp.org
+server 2.rhel.pool.ntp.org
+server 3.rhel.pool.ntp.org
+
+#broadcast 192.168.1.255 autokey        # broadcast server
+#broadcastclient                        # broadcast client
+#broadcast 224.0.1.1 autokey            # multicast server
+#multicastclient 224.0.1.1              # multicast client
+#manycastserver 239.255.254.254         # manycast server
+#manycastclient 239.255.254.254 autokey # manycast client
+
+# Undisciplined Local Clock. This is a fake driver intended for backup
+# and when no outside source of synchronized time is available.
+#server 127.127.1.0     # local clock
+#fudge  127.127.1.0 stratum 10
+
+# Enable public key cryptography.
+#crypto
+
+includefile /etc/ntp/crypto/pw
+
+# Key file containing the keys and key identifiers used when operating
+# with symmetric key cryptography.
+keys /etc/ntp/keys
+
+[root@Lddvscm11 Desktop]# service ntpd start
+Starting ntpd: 
+[root@Lddvscm11 Desktop]# chkconfig ntpd on
+[root@Lddvscm11 Desktop]# iptables -I INPUT -p udp --dport 123 -i ACCEPT
+[root@Lddvscm11 Desktop]# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+           udp  --  anywhere             anywhere            udp dpt:ntp 
+ACCEPT     udp  --  anywhere             anywhere            udp dpt:domain 
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:domain 
+ACCEPT     udp  --  anywhere             anywhere            udp dpt:bootps 
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:bootps 
+ACCEPT     all  --  anywhere             anywhere            state RELATED,ESTABLISHED 
+ACCEPT     icmp --  anywhere             anywhere            
+ACCEPT     all  --  anywhere             anywhere            
+ACCEPT     tcp  --  anywhere             anywhere            state NEW tcp dpt:ssh 
+REJECT     all  --  anywhere             anywhere            reject-with icmp-host-prohibited 
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+ACCEPT     all  --  anywhere             192.168.122.0/24    state RELATED,ESTABLISHED 
+ACCEPT     all  --  192.168.122.0/24     anywhere            
+ACCEPT     all  --  anywhere             anywhere            
+REJECT     all  --  anywhere             anywhere            reject-with icmp-port-unreachable 
+REJECT     all  --  anywhere             anywhere            reject-with icmp-port-unreachable 
+ACCEPT     all  --  anywhere             anywhere            PHYSDEV match --physdev-is-bridged 
+REJECT     all  --  anywhere             anywhere            reject-with icmp-host-prohibited 
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+[root@Lddvscm11 Desktop]# service iptables save
+iptables: Saving firewall rules to /etc/sysconfig/iptables:[  OK  ]
+[root@Lddvscm11 Desktop]# ntpq -p
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp2.ggsrv.de   194.58.200.20    2 u   11   64    3  134.496  2522553   0.680
+ ntp1.ggsrv.de   194.58.200.20    2 u   57   64    3  132.245  2522553   1.165
+ ec2-13-126-27-1 169.254.169.123  4 u    1   64    7   11.788  2522553  11.148
+ 139.59.15.185   157.245.102.2    3 u   31   64    3   15.356  2522552   0.927
+[root@Lddvscm11 Desktop]# /etc/init.d/ntpd restart
+Shutting down ntpd:                                        [  OK  ]
+Starting ntpd:                                             [  OK  ]
+[root@Lddvscm11 Desktop]# /usr/sbin/ntupdate pool.ntp.org
+bash: /usr/sbin/ntupdate: No such file or directory
+[root@Lddvscm11 Desktop]# /usr/sbin/ntpdate pool.ntp.org
+26 Jun 05:20:06 ntpdate[3004]: the NTP socket is in use, exiting
+[root@Lddvscm11 Desktop]# nptdate -u 192.168.122.1
+bash: nptdate: command not found
+[root@Lddvscm11 Desktop]# ntpdate -u 192.168.122.1
+26 Jun 05:21:21 ntpdate[3027]: no server suitable for synchronization found
+[root@Lddvscm11 Desktop]# ntpdc -c sysinfo
+system peer:          0.0.0.0
+system peer mode:     unspec
+leap indicator:       11
+stratum:              16
+precision:            -21
+root distance:        0.00000 s
+root dispersion:      0.00015 s
+reference ID:         [83.84.69.80]
+reference time:       00000000.00000000  Thu, Feb  7 2036 11:58:16.000
+system flags:         auth monitor ntp kernel stats 
+jitter:               0.003616 s
+stability:            0.000 ppm
+broadcastdelay:       0.003998 s
+authdelay:            0.000000 s
+
