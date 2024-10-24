@@ -1,0 +1,16 @@
+yum install ntp
+vi /etc/ntp.conf
+service ntpd start
+chkconfig ntpd on
+iptables -I INPUT -p udp --dport 123 -i ACCEPT
+iptables -L
+service iptables save
+ntpq -p
+/etc/init.d/ntpd restart
+/usr/sbin/ntupdate pool.ntp.org
+/usr/sbin/ntpdate pool.ntp.org
+nptdate -u 192.168.122.1
+ntpdate -u 192.168.122.1
+ntpdc -c sysinfo
+
+

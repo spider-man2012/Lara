@@ -1,0 +1,91 @@
+yum install samba
+
+rpm -qa | grep samba
+
+pwd
+
+mkdir tycssamba
+
+cd tycssamba
+
+touch file1 file2 file3
+
+cat>tycssamba.txt
+Hii!! This is TYCS
+
+ls
+
+vi /etc/samba/smb.conf
+service smb restart
+
+service smb restart
+
+chkconfig smb on
+
+testparm
+
+Load smb config files from /etc/samba/smb.conf
+rlimit_max: rlimit_max (1024) below minimum Windows limit (16384)
+params.c:Parameter() - Ignoring badly formed line in configuration file: ot@localhost tyitsamba]#
+Processing section "[homes]"
+Processing section "[printers]"
+Processing section "[tycssamba]"
+Loaded services file OK.
+Server role: ROLE_STANDALONE
+Press enter to see a dump of your service definitions
+
+[global]
+	workgroup = MYGROUP
+	server string = Samba Server Version %v
+	log file = /var/log/samba/log.%m
+	max log size = 50
+	cups options = raw
+
+[homes]
+	comment = Home Directories
+	read only = No
+	browseable = No
+
+[printers]
+	comment = All Printers
+	path = /var/spool/samba
+	printable = Yes
+	browseable = No
+
+[tycssamba]
+	comment = tycs samba sharing Stuff
+	path = /home/tycssamba
+	write list = Administrator
+	read only = No
+	guest ok = Yes
+
+
+service iptables stop
+
+service iptables status
+
+setenforce 0
+
+getsebool -a
+
+useradd tysmbuser
+
+useradd tysmbuser
+
+smbpasswd -a tysmbuser
+
+smbpasswd -a tysmbuser
+
+ifconfig
+
+smbclient //192.168.122.1/root/tycssmb -U tycssmbuser
+
+smbclient //192.168.122.1/root/tycssmb -U 
+
+service smb restart
+
+chmod -R 777 /root/Desktop/tycssamba
+
+ls
+
+pwd

@@ -1,0 +1,9 @@
+su
+sudo apt-get update
+--Add user : System setting -> User Accounts -> Unlock -> Add user  ->Exit
+su
+vi /etc/network/interfaces
+echo "net.ipv6.conf.all.disable_ipv6=1">>/etc/sysctl.conf
+sysctl -p
+ipmaddr
+
